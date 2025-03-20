@@ -32,7 +32,9 @@ bool enqueue(CircularQueue *q, int value) {
     q->buffer[q->tail] = value;
     q->tail = (q->tail + 1) % q->max_size;
     q->current_size++;
-    pthread_cond_signal(&q->not_empty);
+    if (q->current_size == 1) {
+        pthread_cond_signal(&q->not_empty);
+    }
     return true;
 }
 

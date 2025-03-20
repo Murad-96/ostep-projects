@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
         printf("Queue is full\n");
         pthread_cond_wait(&q.not_full, &q.lock);
       }
-      enqueue(&q, conn_fd); // signals the condition variable
+      enqueue(&q, conn_fd); // signals the condition variable when the queue is not empty
       printf("Connection added to the queue\n");
       printf("Front of the queue: %d\n", q.buffer[q.head]);
       pthread_mutex_unlock(&q.lock);
