@@ -35,11 +35,7 @@ int main() {
             }
         } else {
             char delim[] = " \0";
-            char *args = strtok(NULL, delim);
-            char *output = strtok(NULL, ">");
-            if (output != NULL) {
-                printf("output: %s\n", output);
-            }
+            char *args = strtok(NULL, "\0");
             printf("path: %s\n", path);
             printf("args: %s\n", args);
             printf("command: %s\n", command);
@@ -47,9 +43,35 @@ int main() {
             strcpy(full_path, path);
             strcat(full_path, "/");
             strcat(full_path, command);
-            char *argv[] = {full_path, args, NULL};
-            printf("full_path: %s\n", full_path);
-            printf("args: %s\n", args);
+            // Dynamically build argv array
+            int argv_size = 10; // Initial size
+            char **argv = malloc(argv_size * sizeof(char *));
+            argv[0] = full_path; // First argument is the command itself
+            int argc = 1;
+            char *output = NULL;
+
+            char *arg = strtok(args, " ");
+            while (arg != NULL) {
+                if (argc >= argv_size - 1) { // Resize argv if needed
+                    argv_size *= 2;
+                    argv = realloc(argv, argv_size * sizeof(char *));
+                }
+                if (strstr(arg, ">") != NULL) {
+                    printf("arg: %s\n", arg);
+                    output = arg + 1;
+                    printf("output: %s\n", output);
+                    argv[argc] = NULL; // Null-terminate the array
+                    break;
+                }
+                argv[argc++] = arg; // Add argument to argv
+                arg = strtok(NULL, " ");
+            }
+            argv[argc] = NULL; // Null-terminate the array
+
+            // Debug print argv
+            for (int i = 0; i < argc; i++) {
+                printf("argv[%d]: %s\n", i, argv[i]);
+            }
             pid_t pid = fork();
             if (pid == 0) {
                 if (output != NULL) {
@@ -62,6 +84,7 @@ int main() {
             }
             waitpid(pid, NULL, 0);
             free(full_path);
+            free(argv);
         }
     }
     return 0;
