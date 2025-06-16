@@ -7,7 +7,7 @@
 #include <fcntl.h>
 
 int main() {
-    char *path = "/usr/bin";
+    char *path = "/usr/bin"; // likely to be /bin on Mac
     while (1) {
         printf("wish> ");
         char *input = NULL;
@@ -43,6 +43,7 @@ int main() {
             strcpy(full_path, path);
             strcat(full_path, "/");
             strcat(full_path, command);
+
             // Dynamically build argv array
             int argv_size = 10; // Initial size
             char **argv = malloc(argv_size * sizeof(char *));
@@ -58,13 +59,14 @@ int main() {
                 }
                 if (strstr(arg, ">") != NULL) {
                     printf("arg: %s\n", arg);
-                    output = arg + 1;
+                    arg = arg + 1;
+                    output = strtok(NULL, " ");
                     printf("output: %s\n", output);
                     argv[argc] = NULL; // Null-terminate the array
                     break;
                 }
                 argv[argc++] = arg; // Add argument to argv
-                arg = strtok(NULL, " ");
+                arg = strtok(NULL, " "); // Get next argument
             }
             argv[argc] = NULL; // Null-terminate the array
 
