@@ -2,6 +2,8 @@
 triple:          'arm64-apple-darwin'
 binary-path:     wish
 relocations:
-  - { offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003938, symSize: 0x4D8 }
-  - { offset: 0x4D, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003938, symSize: 0x4D8 }
+  - { offset: 0x26, size: 0x8, addend: 0x0, symName: _parse_commands, symObjAddr: 0x0, symBinAddr: 0x1000036D4, symSize: 0xC4 }
+  - { offset: 0x41, size: 0x8, addend: 0x0, symName: _parse_commands, symObjAddr: 0x0, symBinAddr: 0x1000036D4, symSize: 0xC4 }
+  - { offset: 0x9D, size: 0x8, addend: 0x0, symName: _parse_args, symObjAddr: 0xC4, symBinAddr: 0x100003798, symSize: 0x1B0 }
+  - { offset: 0xF9, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x274, symBinAddr: 0x100003948, symSize: 0x48C }
 ...

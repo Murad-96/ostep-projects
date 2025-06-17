@@ -1,0 +1,9 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     wish
+relocations:
+  - { offset: 0x26, size: 0x8, addend: 0x0, symName: _parse_commands, symObjAddr: 0x0, symBinAddr: 0x100000CE0, symSize: 0xB0 }
+  - { offset: 0x41, size: 0x8, addend: 0x0, symName: _parse_commands, symObjAddr: 0x0, symBinAddr: 0x100000CE0, symSize: 0xB0 }
+  - { offset: 0x8F, size: 0x8, addend: 0x0, symName: _parse_args, symObjAddr: 0xB0, symBinAddr: 0x100000D90, symSize: 0x120 }
+  - { offset: 0xE1, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x1D0, symBinAddr: 0x100000EB0, symSize: 0x6F }
+...

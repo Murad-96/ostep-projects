@@ -1,8 +1,0 @@
-total 112
--rw-r--r--@   1 cex  staff  12170 Mar 20 14:16 README.md
--rw-r--r--@   1 cex  staff      0 Jun 16 17:06 output.txt
--rwxr-xr-x@   1 cex  staff    124 Mar 20 14:16 test-wish.sh
-drwxr-xr-x@ 141 cex  staff   4512 Mar 20 14:16 tests
--rwxr-xr-x@   1 cex  staff  34232 Jun 16 17:06 wish
--rw-r--r--@   1 cex  staff   3160 Jun 16 17:02 wish.c
-drwxr-xr-x@   3 cex  staff     96 Mar 20 14:50 wish.dSYM
