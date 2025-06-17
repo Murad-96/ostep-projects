@@ -59,6 +59,7 @@ void parse_args(struct command *cmd) {
 }
 
 int main() {
+    char error_message[30] = "An error has occurred\n";
     char *path = "/usr/bin"; // likely to be /bin on Mac
     while (1) {
         printf("wish> ");
@@ -99,9 +100,11 @@ int main() {
             if (commands[0].argv[1] != NULL) {
                 if (chdir(commands[0].argv[1]) != 0) {
                     perror("cd failed");
+                    write(STDERR_FILENO, error_message, strlen(error_message));
                 }
             } else {
                 printf("Error: No directory provided\n");
+                write(STDERR_FILENO, error_message, strlen(error_message));
             }
         } else {
 
@@ -117,6 +120,7 @@ int main() {
                         int fd = open(cmd->output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
                         if (fd < 0) {
                             perror("open failed");
+                            write(STDERR_FILENO, error_message, strlen(error_message));
                             exit(1); // Exit child process on failure
                         }
                         dup2(fd, STDOUT_FILENO); // Redirect stdout to the file
@@ -124,6 +128,7 @@ int main() {
                     }
                     execvp(cmd->argv[0], cmd->argv);
                     perror("execv failed"); // If execv fails
+                    write(STDERR_FILENO, error_message, strlen(error_message));
                     exit(1); // Exit child process on failure
                 } else if (pid < 0) { // Fork failed
                     perror("fork failed");
@@ -139,6 +144,7 @@ int main() {
                         break; // No more child processes
                     } else {
                         perror("wait failed");
+                        write(STDERR_FILENO, error_message, strlen(error_message));
                     }
                 }
             }
